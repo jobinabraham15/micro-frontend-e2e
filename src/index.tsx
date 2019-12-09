@@ -6,19 +6,16 @@ import * as serviceWorker from "./serviceWorker";
 
 declare global {
   interface Window {
-    renderOrder: (containerId: string, history?: any) => void;
+    renderE2E: (root: any, containerId: string, history?: any) => void;
   }
 }
 
-window.renderOrder = (containerId, history) => {
-  ReactDOM.render(
-    <App history={history} />,
-    document.getElementById(containerId)
-  );
+window.renderE2E = (root, containerId, history) => {
+  ReactDOM.render(<App history={history} />, root.getElementById(containerId));
 };
 
 if (process.env.NODE_ENV === "development") {
-  window.renderOrder("root");
+  window.renderE2E(window.document, "root");
 }
 
 // If you want your app to work offline and load faster, you can change
